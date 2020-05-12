@@ -1,17 +1,17 @@
-function render() {
-  var list = document.querySelector('#sessions');
+"use strict";
+
+import getSessions, { sessionTemplate } from './sessionRepository.js';
+
+const render = (listItems) => {
+  const list = document.querySelector('#sessions');
   if (!list) return;
-  list.innerHTML = sessionTemplate(data.listItems);
+  list.innerHTML = sessionTemplate(listItems);
 };
 
-
-var data = {
-  listItems: []
+const renderSessions = async () => {
+  const sessions = await getSessions()
+  console.log('async!');
+  render(sessions);
 };
 
-getSessions()
-  .then((sessions)=>{
-    console.log('promises!')
-    data.listItems = sessions;
-    render();
-  });
+renderSessions();
